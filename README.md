@@ -15,7 +15,7 @@ In your web page:
 <script src="dist/NavigationBackgroundImage.min.js"></script>
 <script>
 jQuery(function($) {
-  $.awesome(); // "awesome"
+  $.NavigationBackgroundImageSlider();
 });
 </script>
 ```
