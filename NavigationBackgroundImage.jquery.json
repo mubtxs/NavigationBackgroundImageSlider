@@ -1,0 +1,27 @@
+{
+  "name": "NavigationBackgroundImage",
+  "title": "Navigation Menu Background Slider",
+  "description": "This jquery plugin slides images in the background. The navigation is on top of the background images and is highligted on click.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/mubtxs/NavigationBackgroundImageSlider",
+  "author": {
+    "name": "Mubtxs",
+    "email": "mubtxs.android@gmail.com",
+    "url": "mubtxs.blogspot.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mubtxs/NavigationBackgroundImageSlider.git"
+  },
+  "bugs": "https://github.com/mubtxs/NavigationBackgroundImageSlider.git/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/mubtxs/NavigationBackgroundImageSlider.git/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.0"
+  },
+  "keywords": ["jquery", "background", "nav", "navigation", "slider"]
+}

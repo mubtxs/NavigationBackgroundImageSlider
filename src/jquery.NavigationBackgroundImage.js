@@ -1,0 +1,197 @@
+/*
+ * NavigationBackgroundImage
+ * https://github.com/mubtxs/NavigationBackgroundImageSlider.git
+ *
+ * Copyright (c) 2014 Mubtxs
+ * Licensed under the MIT license.
+ */
+
+(function($, undefined) {
+
+	"use strict";
+
+  $.fn.NavigationBackgroundImage = function(options) {
+  
+  return this.each(function(i) {
+  
+		// Override default options with passed-in options.
+		options = $.extend({}, $.fn.NavigationBackgroundImage.options, options);
+
+		// correct delay and speed. speed not good to be greater than delay
+		options.delay = ((options.speed + 100) > options.delay) ? (options.speed + 100) : options.delay;
+
+		/* ===== references ===== */
+		var $this = $(this);
+		
+		// nav
+		var $nav = $this.find(options.nav)
+		, $navItem = $nav.find(options.navItem)
+		, navCount = $navItem.length;
+		
+		// slider
+		var $slider = $this.find(options.slider)
+		, $sliderItem = $slider.find(options.sliderItem)
+		, slideCount = $sliderItem.length;
+		
+		// speed of animation and delay between animations
+		var $speed = options.speed
+		, $delay = options.delay;
+				
+		/* ===== Initialize slider ===== */
+		
+		// get current nav and slide
+		var currNav = ($nav.find('.active-nav').length) ? $nav.find('.active-nav') : $navItem.filter(':first').addClass('active-nav');
+		
+		// add show class
+		currNav.addClass('show-nav');
+		
+		// get currNav position
+		var pos = currNav.index();
+			
+		// find image in this position and make current
+		var	currImg = ($($sliderItem.get(pos)).length) ? $($sliderItem.get(pos)).addClass('active-img') : '';
+		
+		// add show class
+		currImg.addClass('show-img');
+
+		/* ===== handle fade animation ===== */
+		
+		var playAnimation = function() {
+		
+			// show nav transition
+			$nav.find('.show-nav').toggleClass('show-nav');
+			$nav.find('.active-nav').toggleClass('show-nav')
+			
+			// show image transition
+			$slider.find('.show-img').toggleClass('show-img').animate({opacity: 0}, $speed);
+			$slider.find('.active-img').toggleClass('show-img').animate({opacity: 0.8}, $speed);
+		};		
+
+		// do animation
+		playAnimation();
+		
+		/* ===== handle click on nav item ===== */
+		
+		$navItem.click(function(event) {
+		
+			// get clicked nav
+			var clicked = $(this);
+			
+			// check if clicked is active
+			if(clicked.hasClass('active-nav')) {
+				// do nothing
+				return false;
+			}
+						
+			// make current inactive
+			currNav.removeClass('active-nav');
+			
+			// make clicked active
+			clicked.addClass('active-nav');
+			
+			// get clicked position
+			pos = clicked.index();
+						
+			// find corresponding slide in new pos
+			var clickedSlide = $($sliderItem.get(pos));
+			
+			// check if slide exists
+			if(!clickedSlide)
+			{
+				// do nothing
+				return false;
+			}
+						
+			// find current image and make inactive
+			if($slider.find('.active-img')) {
+				$slider.find('.active-img').removeClass('active-img');
+			}
+			
+			// get current
+			clickedSlide.addClass('active-img');
+			
+			//get new current classes			
+			currNav = $nav.find('.active-nav');
+			currImg = $slider.find('.active-img');
+			
+			playAnimation();
+			
+			event.preventDefault();
+			
+			return false;			
+		});
+		
+		/* ===== automate scroll ===== */
+		var rotate = function() {
+			
+			// get next
+			var cn = (currNav.index() == (navCount - 1)) ? $navItem.filter(':first') : currNav.next();
+			
+			// make next active
+			cn.addClass('active-nav')
+			
+			// make current inactive
+			currNav.removeClass('active-nav');
+			
+			// add show class to next
+			cn.addClass('show-nav');
+			
+			// get position of next
+			pos = cn.index();
+						
+			// find corresponding slide in this position
+			var currSlide = $($sliderItem.get(pos));
+				
+			// check if slide exists
+			if(!currSlide)
+			{
+				// do nothing
+				return false;
+			}
+			
+			// make image active
+			currSlide.addClass('active-img');
+			
+			// make current inactive
+			currImg.removeClass('active-img');
+						
+			//get new current classes			
+			currNav = $nav.find('.active-nav');
+			currImg = $slider.find('.active-img');		
+									
+			// do animation
+			playAnimation();
+		};
+
+		/* ===== disable/enable auto rotation ===== */
+		if (options.autoRotate) {
+			// timer
+			var run = setInterval(rotate, $delay);
+			
+			// on mouse hover, pause the auto rotation, otherwise rotate it
+			$this.hover(
+				function() {
+					clearInterval(run);
+				},
+				function() {
+					run = setInterval(rotate, $delay);
+				}
+			);
+		}
+		
+		//return this;
+		});
+  };
+
+  // default options.
+  $.fn.NavigationBackgroundImage.options = {
+		nav: 'ul.bgs-nav',			// element selector for nav container
+		navItem: 'li',				// element selector for nav item
+		slider: '.bgs-slider',		// element selector for slider container
+		sliderItem: '.bgs-slide',	// element selector for slider item
+		delay: 5000, 				// rotation speed
+		speed: 600,      			// slide speed
+		autoRotate: true 			// auto rotate
+  };
+
+}(jQuery));

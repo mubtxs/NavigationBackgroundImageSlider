@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="slider">
+        <meta name="author" content="mubtxs">
+
+        <title>Navigation Background Slider</title>
+
+        <!-- Custom styles for this template -->
+        <link href="assets/css/style.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="assets/js/modernizr.js"></script>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="inner-container">
+
+                <div class="nav-slider">
+
+                    <div class="nav-container">
+
+                        <ul class="nav">
+
+                            <li>
+                                <a href="#">
+                                    First
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Second
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Third
+                                </a>	
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Forth
+                                </a>	
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Fifth
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Sixth
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    Seventh
+                                </a>
+                            </li>
+
+                        </ul>
+
+                        <div class="clr"></div>
+
+                    </div>
+
+                    <div class="slides-container">
+                        
+                        <div class="slides-overlay"></div>
+                        
+                        <div class="slides">
+
+                            <img class="slide" src="assets/img/img-1.png" alt="" />
+                            <img class="slide" src="assets/img/img-2.png" alt="" />
+                            <img class="slide" src="assets/img/img-3.png" alt="" />
+                            <img class="slide" src="assets/img/img-4.png" alt="" />
+                            <img class="slide" src="assets/img/img-5.png" alt="" />
+                            <img class="slide" src="assets/img/img-6.png" alt="" />
+                            <img class="slide" src="assets/img/img-7.png" alt="" />
+
+                        </div>
+                        
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="../libs/jquery/jquery.js"></script>
+        <script src="../src/jquery.NavigationBackgroundImage.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.nav-slider').NavigationBackgroundImage({
+                    nav: '.nav',
+                    navItem: 'li',
+                    slider: '.slides',
+                    sliderItem: '.slide',
+                    delay: 3600,
+                    speed: 1200,
+                    autoRotate: true
+                });
+            });
+        </script>
+    </body>
+
+</html>
